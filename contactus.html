@@ -1,0 +1,274 @@
+<html>
+<head>
+    <title>Contact Us</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+	<link rel="stylesheet" type="text/css" href="index.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito+Sans:wght@400;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<style type="text/css">
+	.ContactView-title {
+	  font-size: 24px;
+	  padding: 0 24px;
+	}
+
+	.ContactView-list {
+	  list-style: none;
+	  margin: 0;
+	  padding: 0;
+	  border-top: 1px solid #f0f0f0;
+	}
+
+	.ContactItem {
+	  margin: 0;
+	  padding: 8px 24px;
+	  border-bottom: 1px solid #f0f0f0;
+	}
+	.ContactItem-name {
+	  font-size: 16px;
+	  font-weight: bold;
+	  margin: 0;
+	}
+	.ContactItem-email {
+	  font-size: 14px;
+	  margin-top: 4px;
+	  font-style: italic;
+	  color: #888;
+	}
+	.ContactItem-description {
+	  font-size: 14px;
+	  margin-top: 4px;
+	}
+	#react-app{
+	  margin-top: 1%;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	}
+
+
+	.ContactForm {
+	  padding: 8px 24px;
+	}
+	.ContactForm > input,
+	.ContactForm > textarea {
+	  display: block;
+	  width: 240px;
+	  padding: 4px 8px;
+	  margin-bottom: 8px;
+	  border-radius: 3px;
+	  border: 1px solid #888;
+	  font-size: 14px;
+	}
+	.ContactForm > input.ContactForm-error {
+	  border-color: #b30e2f;
+	}
+</style>
+<body>
+	<div class="container-fluid">
+		<ul class="nav nav-pills nav-justified">
+	    	<li class="nav-item">
+	    		<a class="nav-link btn-info" href="index.html"><img class="rounded-circle" src="logo.jpg" alt="Logo" style="width: 20px;"> Music Website</a>
+	    	</li>
+	    	<li class="nav-item">
+	    		<a class="nav-link btn-info" href="angular.html">CREATE MY PLAYLIST</a>
+	    	</li>
+	    	<li class="nav-item">
+	    		<a class="nav-link btn-info" href="registration/login.php">LOGIN</a>
+	    	</li>
+	    	<li class="nav-item">
+	    		<a class="nav-link btn-info" href="registration/signup.php">REGISTER</a>
+	    	</li>
+	    	<li class="nav-item">
+	    		<a class="nav-link btn-info" href="contactus.html">CONTACT US</a>
+	    	</li>
+	 	</ul>
+	</div>
+	<br>
+	<h2 style="text-align: center;"><em><b>Drop Your Query Here !</b></em></h2>
+	<h4 style="text-align: center;"><em>Your query will be solved soon and you will get a reply on your email id.</em></h4>
+    <div id="react-app"></div>
+    <script>
+		var ContactForm = React.createClass({
+		  propTypes: {
+		    value: React.PropTypes.object.isRequired,
+		    onChange: React.PropTypes.func.isRequired,
+		    onSubmit: React.PropTypes.func.isRequired
+		  },
+		  
+		  onNameChange: function(e) {
+		    this.props.onChange(Object.assign({}, this.props.value, {name: e.target.value}));
+		  },
+		  
+		  onEmailChange: function(e) {
+		    this.props.onChange(Object.assign({}, this.props.value, {email: e.target.value}));
+		  },
+		  
+		  onDescriptionChange: function(e) {
+		    this.props.onChange(Object.assign({}, this.props.value, {description: e.target.value}));
+		  },
+
+		  onSubmit: function(e) {
+		    e.preventDefault();
+		    this.props.onSubmit();
+		  },
+
+		  render: function() {
+		    var errors = this.props.value.errors || {};
+
+		    return (
+		      	React.createElement('form', {onSubmit: this.onSubmit, className: 'ContactForm', noValidate: true},
+		        React.createElement('input', {
+		          type: 'text',
+		          className: errors.name && 'ContactForm-error',
+		          placeholder: 'Name (required)',
+		          value: this.props.value.name,
+		          onChange: this.onNameChange,
+		        }),
+		        React.createElement('input', {
+		          type: 'email',
+		          className: errors.email && 'ContactForm-error',
+		          placeholder: 'Email (required)',
+		          value: this.props.value.email,
+		          onChange: this.onEmailChange,
+		        }),
+		        React.createElement('textarea', {
+		          placeholder: 'Add Feedback',
+		          value: this.props.value.description,
+		          onChange: this.onDescriptionChange,
+		        }),
+		        React.createElement('button', {type: 'submit',className: "btn btn-info"}, "Submit")
+		      )
+		    );
+		  },
+		});
+
+
+		var ContactItem = React.createClass({
+		  propTypes: {
+		    name: React.PropTypes.string.isRequired,
+		    email: React.PropTypes.string.isRequired,
+		    description: React.PropTypes.string,
+		  },
+
+		  render: function() {
+		    return (
+		      React.createElement('li', {className: 'ContactItem'},
+		        React.createElement('h2', {className: 'ContactItem-name'}, this.props.name),
+		        React.createElement('a', {className: 'ContactItem-email', href: 'mailto:'+this.props.email}, this.props.email),
+		        React.createElement('div', {className: 'ContactItem-description'}, this.props.description)
+		      )
+		    );
+		  },
+		});
+
+
+		var ContactView = React.createClass({
+		  propTypes: {
+		    contacts: React.PropTypes.array.isRequired,
+		    newContact: React.PropTypes.object.isRequired,
+		    onNewContactChange: React.PropTypes.func.isRequired,
+		    onNewContactSubmit: React.PropTypes.func.isRequired,
+		  },
+
+		  render: function() {
+		    var contactItemElements = this.props.contacts
+		      .filter(function(contact) { return contact.email; })
+		      .map(function(contact) { return React.createElement(ContactItem, contact); });
+
+		    return (
+		      	React.createElement('div', {className: 'ContactView'},
+		        React.createElement('h1', {className: 'ContactView-title'}, "Queries"),
+		        React.createElement('ul', {className: 'ContactView-list'}, contactItemElements),
+		        React.createElement(ContactForm, {
+		          value: this.props.newContact,
+		          onChange: this.props.onNewContactChange,
+		          onSubmit: this.props.onNewContactSubmit,
+		        })
+		      )
+		    );
+		  },
+		});
+
+		var CONTACT_TEMPLATE = {name: "", email: "", description: "", errors: null};
+
+		function updateNewContact(contact) {
+		  setState({ newContact: contact });
+		}
+
+
+		function submitNewContact() {
+		  var contact = Object.assign({}, state.newContact, {key: state.contacts.length + 1, errors: {}});
+		  
+		  if (!contact.name) {
+		    contact.errors.name = ["Please enter your new contact's name"];
+		  }
+		  if (!/.+@.+\..+/.test(contact.email)) {
+		    contact.errors.email = ["Please enter your new contact's email"];
+		  }
+
+		  setState(
+		    Object.keys(contact.errors).length === 0 ? {
+		        newContact: Object.assign({}, CONTACT_TEMPLATE),
+		        contacts: state.contacts.slice(0).concat(contact),
+		      }
+		    : { newContact: contact }
+		  );
+		}
+
+		// The app's complete current state
+		var state = {};
+
+		// Make the given changes to the state and perform any required housekeeping
+		function setState(changes) {
+		  Object.assign(state, changes);
+		  
+		  ReactDOM.render(
+		    React.createElement(ContactView, Object.assign({}, state, {
+		      onNewContactChange: updateNewContact,
+		      onNewContactSubmit: submitNewContact,
+		    })),
+		    document.getElementById('react-app')
+		  );
+		}
+
+		// Set initial data
+		setState({
+		  contacts: [
+		    {key: 1, name: "Ansh M Khatri", email: "abc@gmail.com", description: "How can i download more than one songs at once instead of one at a time"},
+		    
+		  ],
+		  newContact: Object.assign({}, CONTACT_TEMPLATE),
+		});
+	</script>
+	<div class="container-fluid">
+		<article>
+			<h3 style="text-align: center;"><b><i>ABOUT US</i></b></h3></div>
+		<aside>
+			<div style="display:inline-block;vertical-align:top;">
+			    <img src="logo.jpg" class="rounded-circle" style="height: 50px;width: 50px;">
+			</div>
+			<div style="display:inline-block;">
+			    <div>MUSIC WEBSITE</div>
+			    <div>AUTHOR : <em>ANSH M KHATRI</em></div>
+			</div>
+		</aside>
+		<section>We are a team of 2 members who are trying to provide users with their favourite songs available online.<br>Users can listen to any song they like as well create playlists of their favourite songs.</section>
+		</article>
+	</div>
+	<div class="footer" align="center">
+		<h4>Follow Us On </h4>
+		<button type="button" class="btn btn-primary btn-lg"><i class="bi bi-facebook"></i></button>
+		<button type="button" class="btn btn-primary btn-lg"><i class="bi bi-instagram"></i></button>
+		<button type="button" class="btn btn-primary btn-lg"><i class="bi bi-twitter"></i></button>		
+	</div>
+</body>
+</html>

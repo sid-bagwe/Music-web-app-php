@@ -1,0 +1,87 @@
+body {
+	background-image: url("bg2.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.second-nav {
+	margin-bottom: 20px;
+}
+
+.second-nav li {
+	display: inline-block;
+	margin-right: 20px;
+}
+
+
+a:link, a:visited {
+  color: black;
+  text-align: center;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: #4C5270;
+  color: white;
+}
+
+.dropdown-menu a:link, a:visited {
+  color: black;
+  display: inline-block;
+}
+
+.dropdown-menu a:hover, a:active {
+  background-color: #4C5270;
+  color: white;
+}
+
+.nav-item {
+	display: inline-block;
+}
+
+
+.dropdown-menu li{
+	position: relative;
+}
+
+.nav-item .submenu{ 
+	display: none;
+  background-color: white;
+  padding-left: 10px;
+	position: absolute;
+}
+
+.dropdown-menu > li:hover > .submenu{
+	display: inline-block;
+}
+
+.col-lg-3 {
+  border: 2px solid #4C5270;
+  padding-left: 5px;
+  margin-left: 25px;
+  height: 550px;
+}
+
+.column {
+  border: 2px solid #4C5270;
+  height: 550px;
+}
+
+.container {
+  position: relative;
+}
+
+.text-block {
+  position: absolute;
+  bottom: 20px;
+  left: 60px;
+  color: white;
+}
+
+aside {
+  float: right;
+  width: 30%;
+  height: 20px; 
+}
